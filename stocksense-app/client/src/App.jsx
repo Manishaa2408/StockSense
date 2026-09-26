@@ -29,6 +29,11 @@ import StockTransfersListPage from './pages/stockTransfers/StockTransfersListPag
 import StockTransferCreatePage from './pages/stockTransfers/StockTransferCreatePage';
 import StockTransferDetailPage from './pages/stockTransfers/StockTransferDetailPage';
 import StockTransferEditPage from './pages/stockTransfers/StockTransferEditPage';
+import StockAdjustmentsListPage from './pages/adjustments/StockAdjustmentsListPage';
+import StockAdjustmentCreatePage from './pages/adjustments/StockAdjustmentCreatePage';
+import StockAdjustmentDetailPage from './pages/adjustments/StockAdjustmentDetailPage';
+import StockAdjustmentEditPage from './pages/adjustments/StockAdjustmentEditPage';
+import StockMovementsPage from './pages/stockMovements/StockMovementsPage';
 
 function App() {
   return (
@@ -57,6 +62,11 @@ function App() {
       <Route path="/stock-transfers/new" element={<ProtectedRoute permission="TRANSFER.CREATE"><StockTransferCreatePage /></ProtectedRoute>} />
       <Route path="/stock-transfers/:id" element={<ProtectedRoute permission="TRANSFER.READ"><StockTransferDetailPage /></ProtectedRoute>} />
       <Route path="/stock-transfers/:id/edit" element={<ProtectedRoute permission="TRANSFER.UPDATE"><StockTransferEditPage /></ProtectedRoute>} />
+      <Route path="/adjustments" element={<ProtectedRoute permission="ADJUSTMENT.READ"><StockAdjustmentsListPage /></ProtectedRoute>} />
+      <Route path="/adjustments/new" element={<ProtectedRoute permission="ADJUSTMENT.CREATE"><StockAdjustmentCreatePage /></ProtectedRoute>} />
+      <Route path="/adjustments/:id" element={<ProtectedRoute permission="ADJUSTMENT.READ"><StockAdjustmentDetailPage /></ProtectedRoute>} />
+      <Route path="/adjustments/:id/edit" element={<ProtectedRoute permission="ADJUSTMENT.UPDATE"><StockAdjustmentEditPage /></ProtectedRoute>} />
+      <Route path="/stock-movements" element={<ProtectedRoute permission="LEDGER.READ"><StockMovementsPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />

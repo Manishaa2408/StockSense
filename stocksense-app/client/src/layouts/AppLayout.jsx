@@ -13,7 +13,9 @@ import {
   Truck,
   Building2,
   MapPin,
-  ArrowLeftRight
+  ArrowLeftRight,
+  ClipboardEdit,
+  Activity
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -34,6 +36,8 @@ export default function AppLayout({ children }) {
     ...(hasPermission('LOCATION.READ') ? [{ name: 'Locations', to: '/locations', icon: MapPin }] : []),
     ...(hasPermission('DELIVERY.READ') ? [{ name: 'Delivery Orders', to: '/deliveries', icon: Truck }] : []),
     ...(hasPermission('TRANSFER.READ') ? [{ name: 'Stock Transfers', to: '/stock-transfers', icon: ArrowLeftRight }] : []),
+    ...(hasPermission('ADJUSTMENT.READ') ? [{ name: 'Stock Adjustments', to: '/adjustments', icon: ClipboardEdit }] : []),
+    ...(hasPermission('LEDGER.READ') ? [{ name: 'Movement History', to: '/stock-movements', icon: Activity }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
