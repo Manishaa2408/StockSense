@@ -5,7 +5,7 @@ class InventoryController {
   async getAll(req, res, next) {
     try {
       const result = await inventoryService.getAll(req.query);
-      return res.status(200).json(ApiResponse.success(result));
+      return ApiResponse.success(res, 'Inventory items fetched successfully', result);
     } catch (error) {
       next(error);
     }
@@ -14,7 +14,7 @@ class InventoryController {
   async getById(req, res, next) {
     try {
       const result = await inventoryService.getById(req.params.id);
-      return res.status(200).json(ApiResponse.success(result));
+      return ApiResponse.success(res, 'Inventory item fetched successfully', result);
     } catch (error) {
       next(error);
     }
@@ -23,7 +23,7 @@ class InventoryController {
   async getStockSummary(req, res, next) {
     try {
       const result = await inventoryService.getStockSummary(req.query);
-      return res.status(200).json(ApiResponse.success(result));
+      return ApiResponse.success(res, 'Stock summary fetched successfully', result);
     } catch (error) {
       next(error);
     }
@@ -32,7 +32,7 @@ class InventoryController {
   async increaseStock(req, res, next) {
     try {
       const result = await inventoryService.increaseStock(req.body);
-      return res.status(200).json(ApiResponse.success(result, 'Stock increased successfully'));
+      return ApiResponse.success(res, 'Stock increased successfully', result);
     } catch (error) {
       next(error);
     }
@@ -41,7 +41,7 @@ class InventoryController {
   async decreaseStock(req, res, next) {
     try {
       const result = await inventoryService.decreaseStock(req.body);
-      return res.status(200).json(ApiResponse.success(result, 'Stock decreased successfully'));
+      return ApiResponse.success(res, 'Stock decreased successfully', result);
     } catch (error) {
       next(error);
     }

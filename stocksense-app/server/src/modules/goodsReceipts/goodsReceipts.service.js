@@ -15,7 +15,7 @@ class GoodsReceiptsService {
         'goods_receipts.*',
         'warehouses.name as warehouse_name',
         'locations.name as location_name',
-        'users.name as creator_name'
+        db.raw("CONCAT(users.first_name, ' ', users.last_name) as creator_name")
       )
       .count('goods_receipt_items.id as item_count')
       .groupBy('goods_receipts.id');
@@ -59,7 +59,7 @@ class GoodsReceiptsService {
         'goods_receipts.*',
         'warehouses.name as warehouse_name',
         'locations.name as location_name',
-        'users.name as creator_name'
+        db.raw("CONCAT(users.first_name, ' ', users.last_name) as creator_name")
       )
       .first();
 
