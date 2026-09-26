@@ -12,7 +12,8 @@ import {
   Ruler,
   Truck,
   Building2,
-  MapPin
+  MapPin,
+  ArrowLeftRight
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -32,6 +33,7 @@ export default function AppLayout({ children }) {
     ...(hasPermission('WAREHOUSE.READ') ? [{ name: 'Warehouses', to: '/warehouses', icon: Building2 }] : []),
     ...(hasPermission('LOCATION.READ') ? [{ name: 'Locations', to: '/locations', icon: MapPin }] : []),
     ...(hasPermission('DELIVERY.READ') ? [{ name: 'Delivery Orders', to: '/deliveries', icon: Truck }] : []),
+    ...(hasPermission('TRANSFER.READ') ? [{ name: 'Stock Transfers', to: '/stock-transfers', icon: ArrowLeftRight }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];

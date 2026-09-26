@@ -25,6 +25,10 @@ import DeliveriesListPage from './pages/deliveries/DeliveriesListPage';
 import DeliveryCreatePage from './pages/deliveries/DeliveryCreatePage';
 import DeliveryDetailPage from './pages/deliveries/DeliveryDetailPage';
 import DeliveryEditPage from './pages/deliveries/DeliveryEditPage';
+import StockTransfersListPage from './pages/stockTransfers/StockTransfersListPage';
+import StockTransferCreatePage from './pages/stockTransfers/StockTransferCreatePage';
+import StockTransferDetailPage from './pages/stockTransfers/StockTransferDetailPage';
+import StockTransferEditPage from './pages/stockTransfers/StockTransferEditPage';
 
 function App() {
   return (
@@ -49,6 +53,10 @@ function App() {
       <Route path="/deliveries/new" element={<ProtectedRoute permission="DELIVERY.CREATE"><DeliveryCreatePage /></ProtectedRoute>} />
       <Route path="/deliveries/:id" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveryDetailPage /></ProtectedRoute>} />
       <Route path="/deliveries/:id/edit" element={<ProtectedRoute permission="DELIVERY.UPDATE"><DeliveryEditPage /></ProtectedRoute>} />
+      <Route path="/stock-transfers" element={<ProtectedRoute permission="TRANSFER.READ"><StockTransfersListPage /></ProtectedRoute>} />
+      <Route path="/stock-transfers/new" element={<ProtectedRoute permission="TRANSFER.CREATE"><StockTransferCreatePage /></ProtectedRoute>} />
+      <Route path="/stock-transfers/:id" element={<ProtectedRoute permission="TRANSFER.READ"><StockTransferDetailPage /></ProtectedRoute>} />
+      <Route path="/stock-transfers/:id/edit" element={<ProtectedRoute permission="TRANSFER.UPDATE"><StockTransferEditPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
