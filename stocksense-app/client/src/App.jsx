@@ -46,6 +46,8 @@ import PurchaseOrdersListPage from './pages/purchaseOrders/PurchaseOrdersListPag
 import PurchaseOrderCreatePage from './pages/purchaseOrders/PurchaseOrderCreatePage';
 import PurchaseOrderDetailPage from './pages/purchaseOrders/PurchaseOrderDetailPage';
 import PurchaseOrderEditPage from './pages/purchaseOrders/PurchaseOrderEditPage';
+import NotificationsPage from './pages/notifications/NotificationsPage';
+import AuditLogPage from './pages/audit/AuditLogPage';
 
 function App() {
   return (
@@ -95,6 +97,8 @@ function App() {
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />
+      <Route path="/audit-logs" element={<ProtectedRoute permission="AUDIT.READ"><AuditLogPage /></ProtectedRoute>} />
+      <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/profile/change-password" element={<ProtectedRoute><ChangePasswordPage /></ProtectedRoute>} />
 

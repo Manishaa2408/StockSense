@@ -11,6 +11,8 @@ exports.seed = async function(knex) {
     ADJUSTMENT: ['CREATE', 'READ', 'UPDATE', 'APPROVE', 'COMPLETE', 'CANCEL', 'DELETE'],
     PURCHASE_ORDER: ['CREATE', 'READ', 'UPDATE', 'CONFIRM', 'CANCEL', 'DELETE'],
     SUPPLIER: ['CREATE', 'READ', 'UPDATE', 'DELETE'],
+    AUDIT: ['READ'],
+    NOTIFICATION: ['READ', 'MANAGE'],
     LEDGER: ['READ'],
     ALERT: ['READ', 'MANAGE'],
     USER: ['CREATE', 'READ', 'UPDATE', 'MANAGE'],

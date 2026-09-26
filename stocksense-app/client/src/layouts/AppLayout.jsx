@@ -17,11 +17,13 @@ import {
   ClipboardEdit,
   Activity,
   PackageCheck,
-  ClipboardCheck,
-  ShoppingCart
+  ShoppingCart,
+  Bell,
+  ShieldCheck
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
+import NotificationBell from '../components/notifications/NotificationBell';
 
 export default function AppLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -46,6 +48,8 @@ export default function AppLayout({ children }) {
     ...(hasPermission('LEDGER.READ') ? [{ name: 'Movement History', to: '/stock-movements', icon: Activity }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Suppliers', to: '/suppliers', icon: Users },
+    ...(hasPermission('AUDIT.READ') ? [{ name: 'Audit Logs', to: '/audit-logs', icon: ShieldCheck }] : []),
+    { name: 'Notifications', to: '/notifications', icon: Bell },
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
 
@@ -117,6 +121,7 @@ export default function AppLayout({ children }) {
           </button>
 
           <div className="flex-1 flex justify-end items-center gap-4">
+            <NotificationBell />
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-medium text-gray-900">{user?.first_name} {user?.last_name}</p>
