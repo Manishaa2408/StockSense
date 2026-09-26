@@ -17,6 +17,7 @@ import {
   ClipboardEdit,
   Activity,
   PackageCheck,
+  ClipboardCheck,
   ShoppingCart,
   Bell,
   ShieldCheck
@@ -46,10 +47,10 @@ export default function AppLayout({ children }) {
     ...(hasPermission('TRANSFER.READ') ? [{ name: 'Stock Transfers', to: '/stock-transfers', icon: ArrowLeftRight }] : []),
     ...(hasPermission('ADJUSTMENT.READ') ? [{ name: 'Stock Adjustments', to: '/adjustments', icon: ClipboardEdit }] : []),
     ...(hasPermission('LEDGER.READ') ? [{ name: 'Movement History', to: '/stock-movements', icon: Activity }] : []),
-    ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Suppliers', to: '/suppliers', icon: Users },
-    ...(hasPermission('AUDIT.READ') ? [{ name: 'Audit Logs', to: '/audit-logs', icon: ShieldCheck }] : []),
+    ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Notifications', to: '/notifications', icon: Bell },
+    ...(hasPermission('AUDIT.READ') ? [{ name: 'Audit Logs', to: '/audit-logs', icon: ShieldCheck }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
 

@@ -35,6 +35,7 @@ app.use('/api/v1/purchase-orders', require('./modules/purchaseOrders/purchaseOrd
 app.use('/api/v1/dashboard', require('./modules/dashboard/dashboard.routes'));
 app.use('/api/v1/suppliers', require('./modules/suppliers/suppliers.routes'));
 app.use('/api/v1/notifications', require('./modules/notifications/notifications.routes'));
+app.use('/api/v1/audit', require('./modules/audit/audit.routes'));
 app.use('/api/v1/audit-logs', require('./modules/audit/audit.routes'));
 
 app.get('/api/v1/health', (req, res) => {

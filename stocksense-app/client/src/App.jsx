@@ -94,6 +94,8 @@ function App() {
       <Route path="/adjustments/:id" element={<ProtectedRoute permission="ADJUSTMENT.READ"><StockAdjustmentDetailPage /></ProtectedRoute>} />
       <Route path="/adjustments/:id/edit" element={<ProtectedRoute permission="ADJUSTMENT.UPDATE"><StockAdjustmentEditPage /></ProtectedRoute>} />
       <Route path="/stock-movements" element={<ProtectedRoute permission="LEDGER.READ"><StockMovementsPage /></ProtectedRoute>} />
+      <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
+      <Route path="/audit" element={<ProtectedRoute permission="AUDIT.READ"><AuditLogPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />

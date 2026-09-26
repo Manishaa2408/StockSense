@@ -16,7 +16,9 @@ exports.seed = async function(knex) {
     LEDGER: ['READ'],
     ALERT: ['READ', 'MANAGE'],
     USER: ['CREATE', 'READ', 'UPDATE', 'MANAGE'],
-    SETTING: ['READ', 'UPDATE']
+    SETTING: ['READ', 'UPDATE'],
+    AUDIT: ['READ'],
+    NOTIFICATION: ['READ', 'MANAGE']
   };
 
   const permissionsToInsert = [];
