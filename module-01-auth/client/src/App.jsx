@@ -18,6 +18,9 @@ import ProductsListPage from './pages/products/ProductsListPage';
 import ProductDetailPage from './pages/products/ProductDetailPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
 import UnitsPage from './pages/units/UnitsPage';
+import WarehousesListPage from './pages/warehouses/WarehousesListPage';
+import WarehouseDetailPage from './pages/warehouses/WarehouseDetailPage';
+import LocationsListPage from './pages/locations/LocationsListPage';
 import DeliveriesListPage from './pages/deliveries/DeliveriesListPage';
 import DeliveryCreatePage from './pages/deliveries/DeliveryCreatePage';
 import DeliveryDetailPage from './pages/deliveries/DeliveryDetailPage';
@@ -39,6 +42,9 @@ function App() {
       <Route path="/products/:id" element={<ProtectedRoute permission="PRODUCT.READ"><ProductDetailPage /></ProtectedRoute>} />
       <Route path="/categories" element={<ProtectedRoute permission="CATEGORY.READ"><CategoriesPage /></ProtectedRoute>} />
       <Route path="/units" element={<ProtectedRoute permission="CATEGORY.READ"><UnitsPage /></ProtectedRoute>} />
+      <Route path="/warehouses" element={<ProtectedRoute permission="WAREHOUSE.READ"><WarehousesListPage /></ProtectedRoute>} />
+      <Route path="/warehouses/:id" element={<ProtectedRoute permission="WAREHOUSE.READ"><WarehouseDetailPage /></ProtectedRoute>} />
+      <Route path="/locations" element={<ProtectedRoute permission="LOCATION.READ"><LocationsListPage /></ProtectedRoute>} />
       <Route path="/deliveries" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveriesListPage /></ProtectedRoute>} />
       <Route path="/deliveries/new" element={<ProtectedRoute permission="DELIVERY.CREATE"><DeliveryCreatePage /></ProtectedRoute>} />
       <Route path="/deliveries/:id" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveryDetailPage /></ProtectedRoute>} />

@@ -23,6 +23,8 @@ app.use('/api/v1/profile', require('./modules/profile/profile.routes'));
 app.use('/api/v1/categories', require('./modules/categories/categories.routes'));
 app.use('/api/v1/units', require('./modules/units/units.routes'));
 app.use('/api/v1/products', require('./modules/products/products.routes'));
+app.use('/api/v1/warehouses', require('./modules/warehouses/warehouses.routes'));
+app.use('/api/v1/locations', require('./modules/locations/locations.routes'));
 app.use('/api/v1/deliveries', require('./modules/deliveries/deliveries.routes'));
 
 app.get('/api/v1/health', (req, res) => {

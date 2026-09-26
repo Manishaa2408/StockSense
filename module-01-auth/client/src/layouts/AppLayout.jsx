@@ -10,12 +10,14 @@ import {
   Package,
   FolderTree,
   Ruler,
-  Truck
+  Truck,
+  Building2,
+  MapPin
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
 
-export default function AppLayout() {
+export default function AppLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, logout, hasPermission } = useAuth();
   const navigate = useNavigate();
@@ -27,6 +29,8 @@ export default function AppLayout() {
       { name: 'Categories', to: '/categories', icon: FolderTree },
       { name: 'Units of Measure', to: '/units', icon: Ruler }
     ] : []),
+    ...(hasPermission('WAREHOUSE.READ') ? [{ name: 'Warehouses', to: '/warehouses', icon: Building2 }] : []),
+    ...(hasPermission('LOCATION.READ') ? [{ name: 'Locations', to: '/locations', icon: MapPin }] : []),
     ...(hasPermission('DELIVERY.READ') ? [{ name: 'Delivery Orders', to: '/deliveries', icon: Truck }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
@@ -117,7 +121,7 @@ export default function AppLayout() {
 
         {/* Page Content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 mt-16 w-full max-w-7xl mx-auto">
-          <Outlet />
+          {children || <Outlet />}
         </main>
       </div>
     </div>

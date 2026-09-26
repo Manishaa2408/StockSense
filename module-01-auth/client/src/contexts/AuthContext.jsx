@@ -15,9 +15,10 @@ export const AuthProvider = ({ children }) => {
     const initAuth = async () => {
       if (token) {
         try {
-          const { data } = await api.get('/auth/me');
-          setUser(data.user);
-          setPermissions(data.permissions || []);
+          const { data: response } = await api.get('/auth/me');
+          const result = response.data || response;
+          setUser(result.user);
+          setPermissions(result.permissions || []);
         } catch (error) {
           localStorage.removeItem('stocksense_token');
           setToken(null);
@@ -31,12 +32,13 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const { data } = await api.post('/auth/login', { email, password });
-    localStorage.setItem('stocksense_token', data.token);
-    setToken(data.token);
-    setUser(data.user);
-    setPermissions(data.permissions || []);
-    return data;
+    const { data: response } = await api.post('/auth/login', { email, password });
+    const result = response.data || response;
+    localStorage.setItem('stocksense_token', result.token);
+    setToken(result.token);
+    setUser(result.user);
+    setPermissions(result.permissions || []);
+    return result;
   };
 
   const signup = async (userData) => {
