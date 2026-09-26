@@ -1,0 +1,67 @@
+const AUDIT_ACTIONS = Object.freeze({
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
+  LOGIN_FAILED: 'LOGIN_FAILED',
+  PASSWORD_RESET: 'PASSWORD_RESET',
+  STATUS_CHANGE: 'STATUS_CHANGE',
+  APPROVE: 'APPROVE',
+  CANCEL: 'CANCEL',
+  ADJUST: 'ADJUST',
+  TRANSFER: 'TRANSFER',
+  RECEIVE: 'RECEIVE',
+  VALIDATE: 'VALIDATE',
+  ROLE_CHANGE: 'ROLE_CHANGE'
+});
+
+const AUDIT_MODULES = Object.freeze({
+  AUTH: 'AUTH',
+  USERS: 'USERS',
+  ROLES: 'ROLES',
+  PRODUCTS: 'PRODUCTS',
+  CATEGORIES: 'CATEGORIES',
+  UNITS: 'UNITS',
+  WAREHOUSES: 'WAREHOUSES',
+  LOCATIONS: 'LOCATIONS',
+  INVENTORY: 'INVENTORY',
+  DELIVERIES: 'DELIVERIES',
+  PURCHASE_ORDERS: 'PURCHASE_ORDERS',
+  GOODS_RECEIPTS: 'GOODS_RECEIPTS',
+  STOCK_MOVEMENTS: 'STOCK_MOVEMENTS',
+  STOCK_TRANSFERS: 'STOCK_TRANSFERS',
+  NOTIFICATIONS: 'NOTIFICATIONS',
+  SUPPLIERS: 'SUPPLIERS',
+  SETTINGS: 'SETTINGS',
+  SYSTEM: 'SYSTEM'
+});
+
+const SENSITIVE_FIELDS = Object.freeze([
+  'password',
+  'password_hash',
+  'passwordHash',
+  'confirm_password',
+  'confirmPassword',
+  'token',
+  'tokenId',
+  'refreshToken',
+  'refresh_token',
+  'secret',
+  'jwt_secret',
+  'otp',
+  'otp_hash',
+  'authorization',
+  'cookie'
+]);
+
+const DEFAULT_PAGE_SIZE = 20;
+const MAX_PAGE_SIZE = 100;
+
+module.exports = {
+  AUDIT_ACTIONS,
+  AUDIT_MODULES,
+  SENSITIVE_FIELDS,
+  DEFAULT_PAGE_SIZE,
+  MAX_PAGE_SIZE
+};
