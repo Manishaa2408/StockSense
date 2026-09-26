@@ -27,6 +27,8 @@ app.use('/api/v1/warehouses', require('./modules/warehouses/warehouses.routes'))
 app.use('/api/v1/locations', require('./modules/locations/locations.routes'));
 app.use('/api/v1/deliveries', require('./modules/deliveries/deliveries.routes'));
 app.use('/api/v1/stock-transfers', require('./modules/stockTransfers/stockTransfers.routes'));
+app.use('/api/v1/inventory', require('./modules/inventory/inventory.routes'));
+app.use('/api/v1/goods-receipts', require('./modules/goodsReceipts/goodsReceipts.routes'));
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
