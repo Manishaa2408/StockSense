@@ -1,136 +1,131 @@
-# StockSense — Inventory & Warehouse Management System
+# 📦 StockSense – Inventory Management System
 
-A modular inventory and warehouse management system built with a business-oriented architecture.
+> Odoo Hackathon Project
 
-## Tech Stack
+StockSense is a modular Inventory Management System designed to digitize and streamline stock-related operations within a business.
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | Node.js + Express.js |
-| Database | MySQL |
-| Query Builder | Knex.js |
-| Authentication | JWT + bcrypt |
-| Frontend | React 18 + Vite |
-| Styling | Tailwind CSS |
+The system aims to replace manual registers, Excel sheets, and scattered stock-tracking methods with a centralized, real-time and easy-to-use inventory management platform.
 
-## Prerequisites
+---
 
-- **Node.js** v18+
-- **MySQL** 8.0+
-- **npm** v9+
+## 🎯 Problem Statement
 
-## Setup
+Businesses often manage inventory using manual registers, spreadsheets, and disconnected tracking methods. This can lead to:
 
-### 1. Database
+- Inaccurate stock information
+- Difficulty tracking stock movements
+- Delays in updating inventory
+- Lack of visibility across warehouses and locations
+- Difficulty identifying low-stock items
+- Poor traceability of inventory adjustments
 
-```sql
-CREATE DATABASE stocksense CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
+StockSense addresses these challenges by providing a centralized system for managing products, stock movements, warehouses, receipts, deliveries, transfers and adjustments.
 
-### 2. Backend
+---
 
-```bash
-cd server
-cp .env.example .env
-# Edit .env with your MySQL credentials
-npm install
-npm run migrate
-npm run seed
-npm run dev
-```
+## 👥 Target Users
 
-Server starts at `http://localhost:5000`
+### Inventory Managers
+- Manage incoming and outgoing stock
+- Monitor inventory levels
+- Manage products and warehouses
+- Track stock movements
+- Monitor low-stock items
 
-### 3. Frontend
+### Warehouse Staff
+- Receive incoming goods
+- Process outgoing deliveries
+- Perform internal stock transfers
+- Perform physical stock counts
+- Record stock adjustments
 
-```bash
-cd client
-npm install
-npm run dev
-```
+---
 
-Client starts at `http://localhost:5173`
+# 🚀 Key Features
 
-### Default Admin Credentials
+## 🔐 Authentication
 
-```
-Email:    admin@stocksense.com
-Password: Admin@123
-```
+- User registration and login
+- Role-based access
+- OTP-based password reset
+- Redirect to Inventory Dashboard after login
 
-## Project Structure
+---
 
-```
-StockSense/
-├── server/                    # Express.js API
-│   ├── db/
-│   │   ├── migrations/        # Database schema migrations
-│   │   └── seeds/             # Seed data
-│   └── src/
-│       ├── config/            # App configuration
-│       ├── constants/         # Error codes, events
-│       ├── middleware/        # Auth, authorization, error handling
-│       ├── modules/           # Feature modules
-│       │   ├── auth/          # Authentication & password reset
-│       │   ├── users/         # User management
-│       │   ├── roles/         # Role management
-│       │   └── profile/       # User profile
-│       └── utils/             # Helpers (ApiResponse, ApiError, logger)
-├── client/                    # React SPA
-│   └── src/
-│       ├── api/               # Axios configuration
-│       ├── components/        # Reusable UI components
-│       ├── contexts/          # Auth context
-│       ├── layouts/           # Auth & App layouts
-│       ├── pages/             # Page components
-│       └── routes/            # Route guards
-└── README.md
-```
+## 📊 Inventory Dashboard
 
-## API Endpoints
+The dashboard provides an overview of current inventory operations.
 
-### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/auth/register` | Register new user |
-| POST | `/api/v1/auth/login` | Login |
-| POST | `/api/v1/auth/logout` | Logout |
-| GET | `/api/v1/auth/me` | Get current user |
+### Dashboard KPIs
 
-### Password Reset
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/auth/password/forgot` | Request OTP |
-| POST | `/api/v1/auth/password/verify-otp` | Verify OTP |
-| POST | `/api/v1/auth/password/reset` | Reset password |
+- Total Products in Stock
+- Low Stock Items
+- Out of Stock Items
+- Pending Receipts
+- Pending Deliveries
+- Scheduled Internal Transfers
 
-### Users (Admin)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/users` | List users (paginated) |
-| GET | `/api/v1/users/:id` | Get user details |
-| POST | `/api/v1/users` | Create user |
-| PUT | `/api/v1/users/:id` | Update user |
-| PATCH | `/api/v1/users/:id/status` | Change user status |
-| PATCH | `/api/v1/users/:id/role` | Change user role |
+### Dynamic Filters
 
-### Roles
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/roles` | List roles |
-| GET | `/api/v1/roles/:id` | Get role with permissions |
+Users can filter inventory information by:
 
-### Profile
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/profile` | Get profile |
-| PUT | `/api/v1/profile` | Update profile |
-| PATCH | `/api/v1/profile/password` | Change password |
+- Document Type
+  - Receipts
+  - Deliveries
+  - Internal Transfers
+  - Adjustments
+- Status
+  - Draft
+  - Waiting
+  - Ready
+  - Done
+  - Canceled
+- Warehouse / Location
+- Product Category
 
-## Module Architecture
+---
 
-This project follows a modular business-oriented architecture. Module 01 (Authentication & User Management) provides the identity and authorization foundation that all future modules will consume.
+# 📦 Product Management
 
-## License
+StockSense provides centralized product management.
 
-ISC
+Each product can contain:
+
+- Product Name
+- SKU / Product Code
+- Category
+- Unit of Measure
+- Initial Stock
+- Reorder Level
+
+Additional functionality includes:
+
+- Product creation
+- Product updates
+- SKU-based search
+- Stock availability by location
+- Product categorization
+- Reordering rules
+
+---
+
+# 📥 Receipts – Incoming Stock
+
+Receipts are used when products arrive from vendors.
+
+### Workflow
+
+```text
+Create Receipt
+      ↓
+Select Supplier
+      ↓
+Select Products
+      ↓
+Enter Received Quantity
+      ↓
+Validate
+      ↓
+Stock Increases
+      ↓
+Stock Ledger Updated
