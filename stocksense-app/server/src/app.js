@@ -31,6 +31,8 @@ app.use('/api/v1/adjustments', require('./modules/adjustments/adjustments.routes
 app.use('/api/v1/stock-movements', require('./modules/stockMovements/stockMovements.routes'));
 app.use('/api/v1/inventory', require('./modules/inventory/inventory.routes'));
 app.use('/api/v1/goods-receipts', require('./modules/goodsReceipts/goodsReceipts.routes'));
+app.use('/api/v1/purchase-orders', require('./modules/purchaseOrders/purchaseOrders.routes'));
+app.use('/api/v1/suppliers', require('./modules/suppliers/suppliers.routes'));
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({

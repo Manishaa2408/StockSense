@@ -17,7 +17,8 @@ import {
   ClipboardEdit,
   Activity,
   PackageCheck,
-  ClipboardCheck
+  ClipboardCheck,
+  ShoppingCart
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -32,6 +33,7 @@ export default function AppLayout({ children }) {
     ...(hasPermission('PRODUCT.READ') ? [{ name: 'Products', to: '/products', icon: Package }] : []),
     ...(hasPermission('PRODUCT.READ') ? [{ name: 'Inventory Stock', to: '/inventory', icon: PackageCheck }] : []),
     ...(hasPermission('RECEIPT.READ') ? [{ name: 'Goods Receipts', to: '/goods-receipts', icon: ClipboardCheck }] : []),
+    ...(hasPermission('PURCHASE_ORDER.READ') ? [{ name: 'Purchase Orders', to: '/purchase-orders', icon: ShoppingCart }] : []),
     ...(hasPermission('CATEGORY.READ') ? [
       { name: 'Categories', to: '/categories', icon: FolderTree },
       { name: 'Units of Measure', to: '/units', icon: Ruler }
