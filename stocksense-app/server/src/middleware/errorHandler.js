@@ -4,11 +4,12 @@ const errorCodes = require('../constants/errorCodes');
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof ApiError) {
-    logger.warn(`[ApiError] ${err.statusCode} - ${err.code}: ${err.message}`);
-    return res.status(err.statusCode).json({
+    const statusCode = (typeof err.statusCode === 'number' && err.statusCode >= 100 && err.statusCode <= 599) ? err.statusCode : 400;
+    logger.warn(`[ApiError] ${statusCode} - ${err.code}: ${err.message}`);
+    return res.status(statusCode).json({
       success: false,
       error: {
-        code: err.code,
+        code: err.code || 'BAD_REQUEST',
         message: err.message
       }
     });

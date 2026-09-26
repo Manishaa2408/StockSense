@@ -671,7 +671,7 @@ const getMasterData = async () => {
   }
 
   if (hasLocations) {
-    locations = await db('locations').select('id', 'warehouse_id', 'name', 'code', 'type');
+    locations = await db('locations').select('id', 'warehouse_id', 'name', 'code');
   } else {
     locations = [
       { id: 1, warehouse_id: 1, name: 'Section A - Bay 01', code: 'LOC-A01', type: 'INTERNAL' },
