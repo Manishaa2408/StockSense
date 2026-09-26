@@ -7,7 +7,10 @@ import {
   LogOut, 
   Menu,
   X,
-  Package
+  Package,
+  FolderTree,
+  Ruler,
+  Truck
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -20,6 +23,11 @@ export default function AppLayout() {
   const navItems = [
     { name: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
     ...(hasPermission('PRODUCT.READ') ? [{ name: 'Products', to: '/products', icon: Package }] : []),
+    ...(hasPermission('CATEGORY.READ') ? [
+      { name: 'Categories', to: '/categories', icon: FolderTree },
+      { name: 'Units of Measure', to: '/units', icon: Ruler }
+    ] : []),
+    ...(hasPermission('DELIVERY.READ') ? [{ name: 'Delivery Orders', to: '/deliveries', icon: Truck }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
@@ -95,7 +103,7 @@ export default function AppLayout() {
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-medium text-gray-900">{user?.first_name} {user?.last_name}</p>
-                <Badge variant="neutral">{user?.Role?.name || 'User'}</Badge>
+                <Badge variant="neutral">{user?.role_name || user?.Role?.name || 'User'}</Badge>
               </div>
               <button 
                 onClick={() => navigate('/profile')}

@@ -7,7 +7,18 @@ const createCategorySchema = Joi.object({
     'any.required': 'Category name is required',
     'string.empty': 'Category name cannot be empty'
   }),
-  description: Joi.string().trim().max(255).allow('', null)
+  description: Joi.string().trim().max(255).allow('', null),
+  parent_id: Joi.number().integer().positive().allow(null, '')
+});
+
+const updateCategorySchema = Joi.object({
+  name: Joi.string().trim().min(2).max(100),
+  description: Joi.string().trim().max(255).allow('', null),
+  parent_id: Joi.number().integer().positive().allow(null, '')
+});
+
+const updateStatusSchema = Joi.object({
+  status: Joi.string().valid('ACTIVE', 'INACTIVE').required()
 });
 
 const validate = (schema) => (req, res, next) => {
@@ -22,5 +33,7 @@ const validate = (schema) => (req, res, next) => {
 
 module.exports = {
   createCategorySchema,
+  updateCategorySchema,
+  updateStatusSchema,
   validate
 };

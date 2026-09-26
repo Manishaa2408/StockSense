@@ -16,6 +16,12 @@ import ProfilePage from './pages/profile/ProfilePage';
 import ChangePasswordPage from './pages/profile/ChangePasswordPage';
 import ProductsListPage from './pages/products/ProductsListPage';
 import ProductDetailPage from './pages/products/ProductDetailPage';
+import CategoriesPage from './pages/categories/CategoriesPage';
+import UnitsPage from './pages/units/UnitsPage';
+import DeliveriesListPage from './pages/deliveries/DeliveriesListPage';
+import DeliveryCreatePage from './pages/deliveries/DeliveryCreatePage';
+import DeliveryDetailPage from './pages/deliveries/DeliveryDetailPage';
+import DeliveryEditPage from './pages/deliveries/DeliveryEditPage';
 
 function App() {
   return (
@@ -31,6 +37,12 @@ function App() {
       <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
       <Route path="/products" element={<ProtectedRoute permission="PRODUCT.READ"><ProductsListPage /></ProtectedRoute>} />
       <Route path="/products/:id" element={<ProtectedRoute permission="PRODUCT.READ"><ProductDetailPage /></ProtectedRoute>} />
+      <Route path="/categories" element={<ProtectedRoute permission="CATEGORY.READ"><CategoriesPage /></ProtectedRoute>} />
+      <Route path="/units" element={<ProtectedRoute permission="CATEGORY.READ"><UnitsPage /></ProtectedRoute>} />
+      <Route path="/deliveries" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveriesListPage /></ProtectedRoute>} />
+      <Route path="/deliveries/new" element={<ProtectedRoute permission="DELIVERY.CREATE"><DeliveryCreatePage /></ProtectedRoute>} />
+      <Route path="/deliveries/:id" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveryDetailPage /></ProtectedRoute>} />
+      <Route path="/deliveries/:id/edit" element={<ProtectedRoute permission="DELIVERY.UPDATE"><DeliveryEditPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
