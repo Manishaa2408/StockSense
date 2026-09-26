@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, RefreshCw } from 'lucide-react';
 import api from '../../api/axios';
+import AppLayout from '../../layouts/AppLayout';
 
 const MOVEMENT_TYPES = ['IN', 'OUT', 'TRANSFER_OUT', 'TRANSFER_IN', 'ADJUSTMENT_INCREASE', 'ADJUSTMENT_DECREASE', 'RETURN'];
 const REFERENCE_TYPES = ['DELIVERY', 'TRANSFER', 'ADJUSTMENT'];
@@ -50,7 +51,8 @@ export default function StockMovementsPage() {
   const resetFilters = () => setFilters({ movement_type: '', reference_type: '', reference_number: '', from: '', to: '', page: 1, limit: 20 });
 
   return (
-    <div className="space-y-6">
+    <AppLayout>
+      <div className="space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Stock Movement History</h1>
@@ -212,5 +214,6 @@ export default function StockMovementsPage() {
         )}
       </div>
     </div>
+    </AppLayout>
   );
 }

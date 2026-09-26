@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Plus, Trash2, ArrowLeft } from 'lucide-react';
 import api from '../../api/axios';
+import AppLayout from '../../layouts/AppLayout';
 
 const REASONS = ['DAMAGED', 'LOST', 'FOUND', 'EXPIRED', 'COUNT_CORRECTION', 'DATA_ENTRY_ERROR', 'RECONCILIATION', 'OTHER'];
 const ITEM_REASONS = ['DAMAGED', 'LOST', 'FOUND', 'EXPIRED', 'COUNT_CORRECTION', 'DATA_ENTRY_ERROR', 'OTHER'];
@@ -94,7 +95,8 @@ export default function StockAdjustmentCreatePage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <AppLayout>
+      <div className="max-w-3xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
         <Link to="/adjustments" className="p-2 rounded-lg hover:bg-gray-100">
@@ -259,5 +261,6 @@ export default function StockAdjustmentCreatePage() {
         </div>
       </form>
     </div>
+    </AppLayout>
   );
 }
