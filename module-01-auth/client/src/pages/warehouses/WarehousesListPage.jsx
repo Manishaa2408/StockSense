@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AppLayout from '../../layouts/AppLayout';
 import { useNavigate } from 'react-router-dom';
 import { Building2, Search, Plus, Eye, Edit2, Power } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -123,6 +124,7 @@ export default function WarehousesListPage() {
   };
 
   return (
+    <AppLayout>
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-3">
@@ -327,5 +329,6 @@ export default function WarehousesListPage() {
         </form>
       </Modal>
     </div>
+    </AppLayout>
   );
 }
