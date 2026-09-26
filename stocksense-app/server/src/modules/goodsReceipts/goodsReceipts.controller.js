@@ -5,7 +5,7 @@ class GoodsReceiptsController {
   async getAll(req, res, next) {
     try {
       const result = await goodsReceiptsService.getAll(req.query);
-      return res.status(200).json(ApiResponse.success(result));
+      return ApiResponse.success(res, 'Goods receipts fetched successfully', result);
     } catch (error) {
       next(error);
     }
@@ -14,7 +14,7 @@ class GoodsReceiptsController {
   async getById(req, res, next) {
     try {
       const result = await goodsReceiptsService.getById(req.params.id);
-      return res.status(200).json(ApiResponse.success(result));
+      return ApiResponse.success(res, 'Goods receipt fetched successfully', result);
     } catch (error) {
       next(error);
     }
@@ -23,7 +23,7 @@ class GoodsReceiptsController {
   async create(req, res, next) {
     try {
       const result = await goodsReceiptsService.create(req.body, req.user.id);
-      return res.status(201).json(ApiResponse.success(result, 'Goods receipt created successfully'));
+      return ApiResponse.created(res, 'Goods receipt created successfully', result);
     } catch (error) {
       next(error);
     }
@@ -32,7 +32,7 @@ class GoodsReceiptsController {
   async update(req, res, next) {
     try {
       const result = await goodsReceiptsService.update(req.params.id, req.body, req.user.id);
-      return res.status(200).json(ApiResponse.success(result, 'Goods receipt updated successfully'));
+      return ApiResponse.success(res, 'Goods receipt updated successfully', result);
     } catch (error) {
       next(error);
     }
@@ -41,7 +41,7 @@ class GoodsReceiptsController {
   async markReceived(req, res, next) {
     try {
       const result = await goodsReceiptsService.markReceived(req.params.id, req.user.id);
-      return res.status(200).json(ApiResponse.success(result, 'Goods receipt marked as received'));
+      return ApiResponse.success(res, 'Goods receipt marked as received', result);
     } catch (error) {
       next(error);
     }
@@ -50,7 +50,7 @@ class GoodsReceiptsController {
   async confirm(req, res, next) {
     try {
       const result = await goodsReceiptsService.confirm(req.params.id, req.user.id);
-      return res.status(200).json(ApiResponse.success(result, 'Goods receipt confirmed successfully'));
+      return ApiResponse.success(res, 'Goods receipt confirmed successfully', result);
     } catch (error) {
       next(error);
     }
@@ -60,7 +60,7 @@ class GoodsReceiptsController {
     try {
       const { reason } = req.body;
       const result = await goodsReceiptsService.cancel(req.params.id, reason, req.user.id);
-      return res.status(200).json(ApiResponse.success(result, 'Goods receipt canceled successfully'));
+      return ApiResponse.success(res, 'Goods receipt canceled successfully', result);
     } catch (error) {
       next(error);
     }

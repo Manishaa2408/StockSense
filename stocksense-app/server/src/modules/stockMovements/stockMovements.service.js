@@ -13,7 +13,6 @@ const getAll = async (query = {}) => {
   const base = db('stock_movements as sm')
     .leftJoin('users as performer', 'sm.performed_by', 'performer.id')
     .leftJoin('products as prod', 'sm.product_id', 'prod.id')
-    .leftJoin('locations as loc', 'sm.location_id', 'loc.id')
     .leftJoin('locations as src_loc', 'sm.source_location_id', 'src_loc.id')
     .leftJoin('locations as dst_loc', 'sm.destination_location_id', 'dst_loc.id');
 
@@ -31,14 +30,12 @@ const getAll = async (query = {}) => {
 
   const movements = await base.clone()
     .select(
-      'sm.id', 'sm.product_id', 'sm.location_id',
+      'sm.id', 'sm.product_id',
       'sm.source_location_id', 'sm.destination_location_id',
       'sm.movement_type', 'sm.quantity',
-      'sm.stock_before', 'sm.stock_after',
-      'sm.reference_type', 'sm.reference_id', 'sm.reference_number',
-      'sm.reason', 'sm.performed_by', 'sm.created_at',
+      'sm.reference_type', 'sm.reference_id',
+      'sm.performed_by', 'sm.created_at',
       'prod.name as product_name', 'prod.sku as product_sku',
-      'loc.name as location_name', 'loc.code as location_code',
       'src_loc.name as source_location_name',
       'dst_loc.name as destination_location_name',
       'performer.first_name as performer_first_name',
@@ -61,14 +58,12 @@ const getById = async (id) => {
   const movement = await db('stock_movements as sm')
     .leftJoin('users as performer', 'sm.performed_by', 'performer.id')
     .leftJoin('products as prod', 'sm.product_id', 'prod.id')
-    .leftJoin('locations as loc', 'sm.location_id', 'loc.id')
     .leftJoin('locations as src_loc', 'sm.source_location_id', 'src_loc.id')
     .leftJoin('locations as dst_loc', 'sm.destination_location_id', 'dst_loc.id')
     .where('sm.id', id)
     .select(
       'sm.*',
       'prod.name as product_name', 'prod.sku as product_sku',
-      'loc.name as location_name', 'loc.code as location_code',
       'src_loc.name as source_location_name',
       'dst_loc.name as destination_location_name',
       'performer.first_name as performer_first_name',

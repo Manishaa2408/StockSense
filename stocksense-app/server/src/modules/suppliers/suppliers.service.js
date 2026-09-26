@@ -1,44 +1,68 @@
 const db = require('../../config/database');
 const ApiError = require('../../utils/ApiError');
+const errorCodes = require('../../constants/errorCodes');
 
-const getAll = async (query = {}) => {
-  const base = db('suppliers');
-  if (query.status) base.where('status', query.status);
-  if (query.search) {
-    const s = `%${query.search.trim()}%`;
-    base.where(function() {
-      this.where('name', 'like', s)
-        .orWhere('code', 'like', s)
-        .orWhere('email', 'like', s)
-        .orWhere('contact_person', 'like', s);
-    });
+class SuppliersService {
+  async getAll({ search = '', status } = {}) {
+    const query = db('suppliers').select('*');
+
+    if (search) {
+      query.where(function() {
+        this.where('code', 'like', `%${search}%`)
+          .orWhere('name', 'like', `%${search}%`)
+          .orWhere('contact_person', 'like', `%${search}%`);
+      });
+    }
+
+    if (status) {
+      query.where('status', status);
+    }
+
+    query.orderBy('name', 'asc');
+
+    return await query;
   }
-  return await base.orderBy('name', 'asc');
-};
 
-const getById = async (id) => {
-  const supplier = await db('suppliers').where({ id }).first();
-  if (!supplier) throw ApiError.notFound('SUPPLIER_NOT_FOUND', 'Supplier not found');
-  return supplier;
-};
+  async getById(id) {
+    const supplier = await db('suppliers').where({ id }).first();
+    if (!supplier) {
+      throw new ApiError(404, errorCodes.RESOURCE_NOT_FOUND, 'Supplier not found');
+    }
+    return supplier;
+  }
 
-const create = async (data) => {
-  const [id] = await db('suppliers').insert({
-    code: data.code || `SUP-${Date.now().toString().slice(-4)}`,
-    name: data.name,
-    email: data.email || null,
-    phone: data.phone || null,
-    contact_person: data.contact_person || null,
-    address: data.address || null,
-    city: data.city || null,
-    country: data.country || 'India',
-    tax_id: data.tax_id || null,
-    status: data.status || 'ACTIVE',
-    notes: data.notes || null,
-    created_at: db.fn.now(),
-    updated_at: db.fn.now()
-  });
-  return await db('suppliers').where({ id }).first();
-};
+  async create(data) {
+    const existing = await db('suppliers').where({ code: data.code }).first();
+    if (existing) {
+      throw new ApiError(400, errorCodes.VALIDATION_ERROR, 'A supplier with this code already exists');
+    }
 
-module.exports = { getAll, getById, create };
+    const [id] = await db('suppliers').insert(data);
+    return await this.getById(id);
+  }
+
+  async update(id, data) {
+    await this.getById(id); // Ensure exists
+
+    const updateData = {
+      ...data,
+      updated_at: db.fn.now()
+    };
+
+    await db('suppliers').where({ id }).update(updateData);
+    return await this.getById(id);
+  }
+
+  async updateStatus(id, status) {
+    await this.getById(id); // Ensure exists
+    
+    await db('suppliers').where({ id }).update({
+      status,
+      updated_at: db.fn.now()
+    });
+
+    return await this.getById(id);
+  }
+}
+
+module.exports = new SuppliersService();

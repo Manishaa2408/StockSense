@@ -12,6 +12,7 @@ import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import UsersListPage from './pages/users/UsersListPage';
 import UserDetailPage from './pages/users/UserDetailPage';
+import SuppliersPage from './pages/suppliers/SuppliersPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChangePasswordPage from './pages/profile/ChangePasswordPage';
 import ProductsListPage from './pages/products/ProductsListPage';
@@ -93,6 +94,7 @@ function App() {
       <Route path="/stock-movements" element={<ProtectedRoute permission="LEDGER.READ"><StockMovementsPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
+      <Route path="/suppliers" element={<ProtectedRoute><SuppliersPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/profile/change-password" element={<ProtectedRoute><ChangePasswordPage /></ProtectedRoute>} />
 
