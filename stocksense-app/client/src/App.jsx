@@ -35,6 +35,13 @@ import StockAdjustmentDetailPage from './pages/adjustments/StockAdjustmentDetail
 import StockAdjustmentEditPage from './pages/adjustments/StockAdjustmentEditPage';
 import StockMovementsPage from './pages/stockMovements/StockMovementsPage';
 
+import InventoryListPage from './pages/inventory/InventoryListPage';
+import InventoryDetailPage from './pages/inventory/InventoryDetailPage';
+import GoodsReceiptsListPage from './pages/goodsReceipts/GoodsReceiptsListPage';
+import GoodsReceiptCreatePage from './pages/goodsReceipts/GoodsReceiptCreatePage';
+import GoodsReceiptDetailPage from './pages/goodsReceipts/GoodsReceiptDetailPage';
+import GoodsReceiptEditPage from './pages/goodsReceipts/GoodsReceiptEditPage';
+
 function App() {
   return (
     <Routes>
@@ -62,6 +69,14 @@ function App() {
       <Route path="/stock-transfers/new" element={<ProtectedRoute permission="TRANSFER.CREATE"><StockTransferCreatePage /></ProtectedRoute>} />
       <Route path="/stock-transfers/:id" element={<ProtectedRoute permission="TRANSFER.READ"><StockTransferDetailPage /></ProtectedRoute>} />
       <Route path="/stock-transfers/:id/edit" element={<ProtectedRoute permission="TRANSFER.UPDATE"><StockTransferEditPage /></ProtectedRoute>} />
+      <Route path="/inventory" element={<ProtectedRoute permission="PRODUCT.READ"><InventoryListPage /></ProtectedRoute>} />
+      <Route path="/inventory/:id" element={<ProtectedRoute permission="PRODUCT.READ"><InventoryDetailPage /></ProtectedRoute>} />
+      
+      <Route path="/goods-receipts" element={<ProtectedRoute permission="RECEIPT.READ"><GoodsReceiptsListPage /></ProtectedRoute>} />
+      <Route path="/goods-receipts/new" element={<ProtectedRoute permission="RECEIPT.CREATE"><GoodsReceiptCreatePage /></ProtectedRoute>} />
+      <Route path="/goods-receipts/:id" element={<ProtectedRoute permission="RECEIPT.READ"><GoodsReceiptDetailPage /></ProtectedRoute>} />
+      <Route path="/goods-receipts/:id/edit" element={<ProtectedRoute permission="RECEIPT.UPDATE"><GoodsReceiptEditPage /></ProtectedRoute>} />
+
       <Route path="/adjustments" element={<ProtectedRoute permission="ADJUSTMENT.READ"><StockAdjustmentsListPage /></ProtectedRoute>} />
       <Route path="/adjustments/new" element={<ProtectedRoute permission="ADJUSTMENT.CREATE"><StockAdjustmentCreatePage /></ProtectedRoute>} />
       <Route path="/adjustments/:id" element={<ProtectedRoute permission="ADJUSTMENT.READ"><StockAdjustmentDetailPage /></ProtectedRoute>} />

@@ -15,7 +15,9 @@ import {
   MapPin,
   ArrowLeftRight,
   ClipboardEdit,
-  Activity
+  Activity,
+  PackageCheck,
+  ClipboardCheck
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -28,6 +30,8 @@ export default function AppLayout({ children }) {
   const navItems = [
     { name: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
     ...(hasPermission('PRODUCT.READ') ? [{ name: 'Products', to: '/products', icon: Package }] : []),
+    ...(hasPermission('PRODUCT.READ') ? [{ name: 'Inventory Stock', to: '/inventory', icon: PackageCheck }] : []),
+    ...(hasPermission('RECEIPT.READ') ? [{ name: 'Goods Receipts', to: '/goods-receipts', icon: ClipboardCheck }] : []),
     ...(hasPermission('CATEGORY.READ') ? [
       { name: 'Categories', to: '/categories', icon: FolderTree },
       { name: 'Units of Measure', to: '/units', icon: Ruler }
