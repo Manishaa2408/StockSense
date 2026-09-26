@@ -15,6 +15,11 @@ import UserDetailPage from './pages/users/UserDetailPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChangePasswordPage from './pages/profile/ChangePasswordPage';
 
+import DeliveriesListPage from './pages/deliveries/DeliveriesListPage';
+import DeliveryDetailPage from './pages/deliveries/DeliveryDetailPage';
+import DeliveryCreatePage from './pages/deliveries/DeliveryCreatePage';
+import DeliveryEditPage from './pages/deliveries/DeliveryEditPage';
+
 function App() {
   return (
     <Routes>
@@ -31,6 +36,11 @@ function App() {
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/profile/change-password" element={<ProtectedRoute><ChangePasswordPage /></ProtectedRoute>} />
+
+      <Route path="/deliveries" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveriesListPage /></ProtectedRoute>} />
+      <Route path="/deliveries/new" element={<ProtectedRoute permission="DELIVERY.CREATE"><DeliveryCreatePage /></ProtectedRoute>} />
+      <Route path="/deliveries/:id" element={<ProtectedRoute permission="DELIVERY.READ"><DeliveryDetailPage /></ProtectedRoute>} />
+      <Route path="/deliveries/:id/edit" element={<ProtectedRoute permission="DELIVERY.UPDATE"><DeliveryEditPage /></ProtectedRoute>} />
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>

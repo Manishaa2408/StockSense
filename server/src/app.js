@@ -20,6 +20,7 @@ app.use('/api/v1/auth', require('./modules/auth/auth.routes'));
 app.use('/api/v1/users', require('./modules/users/users.routes'));
 app.use('/api/v1/roles', require('./modules/roles/roles.routes'));
 app.use('/api/v1/profile', require('./modules/profile/profile.routes'));
+app.use('/api/v1/deliveries', require('./modules/deliveries/deliveries.routes'));
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({

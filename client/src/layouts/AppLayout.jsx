@@ -7,7 +7,8 @@ import {
   LogOut, 
   Menu,
   X,
-  Package
+  Package,
+  Truck
 } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Badge from '../components/ui/Badge';
@@ -19,6 +20,7 @@ export default function AppLayout() {
 
   const navItems = [
     { name: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
+    ...(hasPermission('DELIVERY.READ') ? [{ name: 'Deliveries', to: '/deliveries', icon: Truck }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
