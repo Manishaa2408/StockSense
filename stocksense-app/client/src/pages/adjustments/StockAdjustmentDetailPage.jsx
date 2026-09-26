@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, XCircle, ThumbsUp } from 'lucide-react';
 import api from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
+import AppLayout from '../../layouts/AppLayout';
 import AdjustmentStatusBadge from '../../components/adjustments/AdjustmentStatusBadge';
 
 export default function StockAdjustmentDetailPage() {
@@ -47,8 +48,8 @@ export default function StockAdjustmentDetailPage() {
     }
   };
 
-  if (loading) return <div className="flex justify-center py-16 text-gray-500 text-sm">Loading...</div>;
-  if (error) return <div className="flex justify-center py-16 text-red-600 text-sm">{error}</div>;
+  if (loading) return <AppLayout><div className="flex justify-center py-16 text-gray-500 text-sm">Loading...</div></AppLayout>;
+  if (error) return <AppLayout><div className="flex justify-center py-16 text-red-600 text-sm">{error}</div></AppLayout>;
   if (!adjustment) return null;
 
   const adj = adjustment;
@@ -61,7 +62,8 @@ export default function StockAdjustmentDetailPage() {
   const currentStep = statusSteps.indexOf(adj.status);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <AppLayout>
+      <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
         <Link to="/adjustments" className="p-2 rounded-lg hover:bg-gray-100">
@@ -243,5 +245,6 @@ export default function StockAdjustmentDetailPage() {
         </div>
       )}
     </div>
+    </AppLayout>
   );
 }

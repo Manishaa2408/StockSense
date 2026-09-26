@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Plus, Search, Filter, RefreshCw } from 'lucide-react';
 import api from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
+import AppLayout from '../../layouts/AppLayout';
 import AdjustmentStatusBadge from '../../components/adjustments/AdjustmentStatusBadge';
 
 const STATUSES = ['DRAFT', 'APPROVED', 'COMPLETED', 'CANCELED'];
@@ -49,7 +50,8 @@ export default function StockAdjustmentsListPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <AppLayout>
+      <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -206,5 +208,6 @@ export default function StockAdjustmentsListPage() {
         )}
       </div>
     </div>
+    </AppLayout>
   );
 }

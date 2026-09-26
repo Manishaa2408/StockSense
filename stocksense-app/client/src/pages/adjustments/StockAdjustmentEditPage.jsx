@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, Trash2 } from 'lucide-react';
 import api from '../../api/axios';
+import AppLayout from '../../layouts/AppLayout';
 
 const REASONS = ['DAMAGED', 'LOST', 'FOUND', 'EXPIRED', 'COUNT_CORRECTION', 'DATA_ENTRY_ERROR', 'RECONCILIATION', 'OTHER'];
 const ITEM_REASONS = ['DAMAGED', 'LOST', 'FOUND', 'EXPIRED', 'COUNT_CORRECTION', 'DATA_ENTRY_ERROR', 'OTHER'];
@@ -111,11 +112,12 @@ export default function StockAdjustmentEditPage() {
     }
   };
 
-  if (loading) return <div className="flex justify-center py-16 text-gray-500 text-sm">Loading...</div>;
-  if (error && !items.length) return <div className="flex justify-center py-16 text-red-600 text-sm">{error}</div>;
+  if (loading) return <AppLayout><div className="flex justify-center py-16 text-gray-500 text-sm">Loading...</div></AppLayout>;
+  if (error && !items.length) return <AppLayout><div className="flex justify-center py-16 text-red-600 text-sm">{error}</div></AppLayout>;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <AppLayout>
+      <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <Link to={`/adjustments/${id}`} className="p-2 rounded-lg hover:bg-gray-100">
           <ArrowLeft className="h-5 w-5 text-gray-600" />
@@ -262,5 +264,6 @@ export default function StockAdjustmentEditPage() {
         </div>
       </form>
     </div>
+    </AppLayout>
   );
 }
