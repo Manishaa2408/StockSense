@@ -43,6 +43,7 @@ export default function AppLayout({ children }) {
     ...(hasPermission('ADJUSTMENT.READ') ? [{ name: 'Stock Adjustments', to: '/adjustments', icon: ClipboardEdit }] : []),
     ...(hasPermission('LEDGER.READ') ? [{ name: 'Movement History', to: '/stock-movements', icon: Activity }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
+    { name: 'Suppliers', to: '/suppliers', icon: Users },
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];
 
