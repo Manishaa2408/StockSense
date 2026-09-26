@@ -14,6 +14,8 @@ import UsersListPage from './pages/users/UsersListPage';
 import UserDetailPage from './pages/users/UserDetailPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChangePasswordPage from './pages/profile/ChangePasswordPage';
+import ProductsListPage from './pages/products/ProductsListPage';
+import ProductDetailPage from './pages/products/ProductDetailPage';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       
       <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+      <Route path="/products" element={<ProtectedRoute permission="PRODUCT.READ"><ProductsListPage /></ProtectedRoute>} />
+      <Route path="/products/:id" element={<ProtectedRoute permission="PRODUCT.READ"><ProductDetailPage /></ProtectedRoute>} />
       <Route path="/users" element={<ProtectedRoute permission="USER.READ"><UsersListPage /></ProtectedRoute>} />
       <Route path="/users/:id" element={<ProtectedRoute permission="USER.READ"><UserDetailPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />

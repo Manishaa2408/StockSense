@@ -19,6 +19,7 @@ export default function AppLayout() {
 
   const navItems = [
     { name: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
+    ...(hasPermission('PRODUCT.READ') ? [{ name: 'Products', to: '/products', icon: Package }] : []),
     ...(hasPermission('USER.READ') ? [{ name: 'Users', to: '/users', icon: Users }] : []),
     { name: 'Profile', to: '/profile', icon: UserCircle },
   ];

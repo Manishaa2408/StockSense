@@ -20,6 +20,9 @@ app.use('/api/v1/auth', require('./modules/auth/auth.routes'));
 app.use('/api/v1/users', require('./modules/users/users.routes'));
 app.use('/api/v1/roles', require('./modules/roles/roles.routes'));
 app.use('/api/v1/profile', require('./modules/profile/profile.routes'));
+app.use('/api/v1/categories', require('./modules/categories/categories.routes'));
+app.use('/api/v1/units', require('./modules/units/units.routes'));
+app.use('/api/v1/products', require('./modules/products/products.routes'));
 
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
