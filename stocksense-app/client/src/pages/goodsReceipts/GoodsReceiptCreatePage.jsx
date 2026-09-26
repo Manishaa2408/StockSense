@@ -38,8 +38,11 @@ export default function GoodsReceiptCreatePage() {
           api.get('/warehouses?status=ACTIVE'),
           api.get('/products?status=ACTIVE&limit=1000') // assuming we get a list for dropdown
         ]);
-        setWarehouses(wRes.data.data || []);
-        setProducts(pRes.data.data || []);
+        const wPayload = wRes.data.data || [];
+        setWarehouses(Array.isArray(wPayload) ? wPayload : (wPayload.warehouses || []));
+
+        const pPayload = pRes.data.data || [];
+        setProducts(Array.isArray(pPayload) ? pPayload : (pPayload.products || []));
       } catch (err) {
         toast.error('Failed to load initial data');
       }

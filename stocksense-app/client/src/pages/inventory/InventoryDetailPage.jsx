@@ -18,10 +18,25 @@ export default function InventoryDetailPage() {
     const fetchInventoryDetail = async () => {
       try {
         setLoading(true);
-        // Fetch product and aggregated stock details
-        const { data } = await api.get(`/inventory/product/${id}`);
-        setProductData(data.product);
-        setStockDetails(data.stock_details || []);
+        const { data } = await api.get(`/inventory/${id}`);
+        const item = data.data;
+        if (item) {
+          setProductData({
+            name: item.product_name || `Product #${item.product_id}`,
+            sku: item.product_sku || '-',
+            category_name: item.category_name || 'General',
+            unit_code: item.unit_code || 'PCS',
+            reorder_level: item.reorder_level || 0
+          });
+          setStockDetails([{
+            id: item.id,
+            warehouse_name: item.warehouse_name || `WH #${item.warehouse_id}`,
+            location_name: item.location_name || `Loc #${item.location_id}`,
+            available_quantity: parseFloat(item.available_quantity ?? (item.quantity - item.reserved_quantity)),
+            reserved_quantity: parseFloat(item.reserved_quantity || 0),
+            total_quantity: parseFloat(item.quantity || 0)
+          }]);
+        }
       } catch (err) {
         toast.error('Failed to fetch inventory details');
       } finally {

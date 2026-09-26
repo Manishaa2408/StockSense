@@ -2,17 +2,17 @@ exports.seed = async function (knex) {
   // Clear existing entries
   await knex('inventory').del();
 
-  const products = await knex('products').select('id', 'name');
-  const locations = await knex('locations').select('id', 'name', 'warehouse_id');
+  const products = await knex('products').select('id', 'sku');
+  const locations = await knex('locations').select('id', 'code', 'warehouse_id');
 
-  const getProduct = (name) => products.find((p) => p.name === name);
-  const getLocation = (name) => locations.find((l) => l.name === name);
+  const getProduct = (sku) => products.find((p) => p.sku === sku);
+  const getLocation = (code) => locations.find((l) => l.code === code);
 
-  const p1 = getProduct('Dell XPS 15');
-  const p2 = getProduct('Logitech MX Master 3');
-  const p3 = getProduct('Large Shipping Box');
-  const p4 = getProduct('M8 Stainless Steel Bolt');
-  const p5 = getProduct('A4 Printing Paper');
+  const p1 = getProduct('PROD-DELL-XPS15');
+  const p2 = getProduct('PROD-LOGI-MXM3');
+  const p3 = getProduct('PROD-BOX-LG-01');
+  const p4 = getProduct('PROD-BOLT-M8-50');
+  const p5 = getProduct('PROD-PAPER-A4-80GSM');
 
   const l1 = getLocation('A-01'); // Chennai
   const l2 = getLocation('A-02'); // Chennai

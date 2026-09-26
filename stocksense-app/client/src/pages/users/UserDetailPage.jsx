@@ -43,7 +43,9 @@ export default function UserDetailPage() {
     const fetchRoles = async () => {
       try {
         const { data } = await api.get('/roles');
-        setRoles(data.data);
+        const payload = data.data || {};
+        const roleList = Array.isArray(payload) ? payload : (payload.roles || []);
+        setRoles(roleList);
       } catch (err) {}
     };
     if (hasPermission('USER.MANAGE')) fetchRoles();

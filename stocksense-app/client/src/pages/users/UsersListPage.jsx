@@ -41,9 +41,13 @@ export default function UsersListPage() {
       if (roleId) params.append('role_id', roleId);
       
       const { data } = await api.get(`/users?${params.toString()}`);
-      setUsers(data.data);
-      setTotalPages(data.meta.totalPages);
-      setTotalItems(data.meta.total);
+      const payload = data.data || {};
+      const userList = Array.isArray(payload) ? payload : (payload.users || []);
+      setUsers(userList);
+
+      const pagination = payload.pagination || data.meta || {};
+      setTotalPages(pagination.totalPages || 1);
+      setTotalItems(pagination.total || userList.length);
     } catch (err) {
       toast.error('Failed to fetch users');
     } finally {
@@ -54,7 +58,9 @@ export default function UsersListPage() {
   const fetchRoles = async () => {
     try {
       const { data } = await api.get('/roles');
-      setRoles(data.data);
+      const payload = data.data || {};
+      const roleList = Array.isArray(payload) ? payload : (payload.roles || []);
+      setRoles(roleList);
     } catch (err) {
       console.error(err);
     }

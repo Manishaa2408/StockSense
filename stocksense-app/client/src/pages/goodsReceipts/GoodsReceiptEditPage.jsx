@@ -40,8 +40,11 @@ export default function GoodsReceiptEditPage() {
           api.get(`/goods-receipts/${id}`)
         ]);
         
-        setWarehouses(wRes.data.data || []);
-        setProducts(pRes.data.data || []);
+        const wPayload = wRes.data.data || [];
+        setWarehouses(Array.isArray(wPayload) ? wPayload : (wPayload.warehouses || []));
+
+        const pPayload = pRes.data.data || [];
+        setProducts(Array.isArray(pPayload) ? pPayload : (pPayload.products || []));
 
         const receipt = rRes.data.data;
         if (receipt.status !== 'DRAFT') {
@@ -52,7 +55,7 @@ export default function GoodsReceiptEditPage() {
 
         setFormData({
           supplier_name: receipt.supplier_name || '',
-          po_reference: receipt.po_reference || '',
+          po_reference: receipt.purchase_order_ref || receipt.po_reference || '',
           warehouse_id: receipt.warehouse_id || '',
           location_id: receipt.location_id || '',
           receipt_date: receipt.receipt_date ? receipt.receipt_date.split('T')[0] : '',

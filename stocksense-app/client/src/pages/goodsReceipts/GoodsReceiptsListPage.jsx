@@ -45,11 +45,13 @@ export default function GoodsReceiptsListPage() {
       if (warehouseId) params.append('warehouse_id', warehouseId);
 
       const { data } = await api.get(`/goods-receipts?${params.toString()}`);
-      setReceipts(data.data || []);
-      if (data.meta) {
-        setTotalPages(data.meta.totalPages);
-        setTotalItems(data.meta.total);
-      }
+      const payload = data.data || {};
+      const list = Array.isArray(payload) ? payload : (payload.list || payload.goods_receipts || []);
+      setReceipts(list);
+
+      const pagination = payload.pagination || data.meta || {};
+      setTotalPages(pagination.totalPages || 1);
+      setTotalItems(pagination.total || list.length);
     } catch (err) {
       toast.error('Failed to fetch goods receipts');
     } finally {
@@ -148,9 +150,9 @@ export default function GoodsReceiptsListPage() {
               ) : (
                 receipts.map((grn) => (
                   <tr key={grn.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-indigo-600">{grn.reference_number}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-indigo-600">{grn.receipt_number || grn.reference_number}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{grn.supplier_name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{grn.po_reference || '-'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{grn.purchase_order_ref || grn.po_reference || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{grn.warehouse_name}</div>
                       <div className="text-sm text-gray-500">{grn.location_name}</div>

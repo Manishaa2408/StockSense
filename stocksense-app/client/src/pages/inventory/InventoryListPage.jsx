@@ -71,14 +71,23 @@ export default function InventoryListPage() {
       if (stockStatus) params.append('status', stockStatus);
 
       const { data } = await api.get(`/inventory?${params.toString()}`);
-      setInventory(data.data || []);
-      if (data.meta) {
-        setTotalPages(data.meta.totalPages);
-        setTotalItems(data.meta.total);
-      }
-      if (data.stats) {
-        setStats(data.stats);
-      }
+      const payload = data.data || {};
+      const items = Array.isArray(payload) ? payload : (payload.inventory || []);
+      setInventory(items);
+
+      const pagination = payload.pagination || data.meta || {};
+      setTotalPages(pagination.totalPages || 1);
+      setTotalItems(pagination.total || items.length);
+
+      const inStock = items.filter((i) => i.status === 'IN_STOCK').length;
+      const lowStock = items.filter((i) => i.status === 'LOW_STOCK').length;
+      const outOfStock = items.filter((i) => i.status === 'OUT_OF_STOCK').length;
+      setStats({
+        total: pagination.total || items.length,
+        inStock,
+        lowStock,
+        outOfStock
+      });
     } catch (err) {
       toast.error('Failed to fetch inventory');
     } finally {

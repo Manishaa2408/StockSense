@@ -36,12 +36,12 @@ export default function GoodsReceiptDetailPage() {
     fetchReceipt();
   }, [id]);
 
-  const handleStatusUpdate = async (newStatus) => {
+  const handleAction = async (actionEndpoint) => {
     try {
       setActionLoading(true);
-      await api.patch(`/goods-receipts/${id}/status`, { status: newStatus });
-      toast.success(`Goods Receipt marked as ${newStatus}`);
-      if (newStatus === 'CONFIRMED') setConfirmModalOpen(false);
+      await api.post(`/goods-receipts/${id}/${actionEndpoint}`);
+      toast.success(`Goods Receipt updated successfully`);
+      if (actionEndpoint === 'confirm') setConfirmModalOpen(false);
       fetchReceipt();
     } catch (err) {
       toast.error(err.response?.data?.error?.message || 'Operation failed');
@@ -84,15 +84,15 @@ export default function GoodsReceiptDetailPage() {
           {receipt.status === 'DRAFT' && hasPermission('RECEIPT.UPDATE') && (
             <>
               <Button variant="outline" icon={Edit} onClick={() => navigate(`/goods-receipts/${id}/edit`)}>Edit Draft</Button>
-              <Button variant="secondary" onClick={() => handleStatusUpdate('RECEIVED')}>Mark as Received</Button>
+              <Button variant="secondary" onClick={() => handleAction('receive')}>Mark as Received</Button>
               <Button icon={CheckCircle} onClick={() => setConfirmModalOpen(true)}>Confirm & Increase Stock</Button>
-              <Button variant="danger" icon={XCircle} onClick={() => handleStatusUpdate('CANCELED')}>Cancel Receipt</Button>
+              <Button variant="danger" icon={XCircle} onClick={() => handleAction('cancel')}>Cancel Receipt</Button>
             </>
           )}
           {receipt.status === 'RECEIVED' && hasPermission('RECEIPT.UPDATE') && (
             <>
               <Button icon={CheckCircle} onClick={() => setConfirmModalOpen(true)}>Confirm & Increase Stock</Button>
-              <Button variant="danger" icon={XCircle} onClick={() => handleStatusUpdate('CANCELED')}>Cancel Receipt</Button>
+              <Button variant="danger" icon={XCircle} onClick={() => handleAction('cancel')}>Cancel Receipt</Button>
             </>
           )}
           {(receipt.status === 'CONFIRMED' || receipt.status === 'CANCELED') && (
@@ -110,11 +110,11 @@ export default function GoodsReceiptDetailPage() {
             <ClipboardCheck className="h-8 w-8 text-indigo-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">{receipt.reference_number}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-1">{receipt.receipt_number || receipt.reference_number}</h1>
             <div className="flex flex-wrap gap-2 text-sm">
               <span className="text-gray-500">Supplier: <strong className="text-gray-900">{receipt.supplier_name}</strong></span>
               <span className="text-gray-300">|</span>
-              <span className="text-gray-500">PO Ref: <strong className="text-gray-900">{receipt.po_reference || 'N/A'}</strong></span>
+              <span className="text-gray-500">PO Ref: <strong className="text-gray-900">{receipt.purchase_order_ref || receipt.po_reference || 'N/A'}</strong></span>
             </div>
           </div>
         </div>
@@ -223,10 +223,10 @@ export default function GoodsReceiptDetailPage() {
               <strong>Warning:</strong> Confirming this receipt will permanently increase warehouse inventory stock for the accepted quantities and record official stock movements. This action cannot be reversed.
             </p>
           </div>
-          <p className="text-gray-700 mb-6">Are you sure you want to confirm GRN <span className="font-bold">{receipt.reference_number}</span>?</p>
+          <p className="text-gray-700 mb-6">Are you sure you want to confirm GRN <span className="font-bold">{receipt.receipt_number || receipt.reference_number}</span>?</p>
           <div className="flex justify-end gap-3">
             <Button variant="outline" onClick={() => setConfirmModalOpen(false)}>Cancel</Button>
-            <Button onClick={() => handleStatusUpdate('CONFIRMED')} loading={actionLoading}>Yes, Confirm & Increase Stock</Button>
+            <Button onClick={() => handleAction('confirm')} loading={actionLoading}>Yes, Confirm & Increase Stock</Button>
           </div>
         </div>
       </Modal>
