@@ -29,7 +29,7 @@ CREATE DATABASE stocksense CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ### 2. Backend Setup
 
 ```bash
-cd server
+cd stocksense-app/server
 cp .env.example .env
 # Configure DB_USER and DB_PASSWORD in .env
 npm install
@@ -43,7 +43,7 @@ Server runs on `http://localhost:5000`
 ### 3. Frontend Setup
 
 ```bash
-cd client
+cd stocksense-app/client
 npm install
 npm run dev
 ```
