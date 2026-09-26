@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AppLayout from '../../layouts/AppLayout';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Building2, Edit2, Power, MapPin, Plus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -153,15 +154,18 @@ export default function WarehouseDetailPage() {
 
   if (loading) {
     return (
+      <AppLayout>
       <div className="flex justify-center items-center h-64">
         <Spinner size="lg" />
       </div>
+      </AppLayout>
     );
   }
 
   if (!warehouse) return null;
 
   return (
+    <AppLayout>
     <div className="space-y-6">
       <div>
         <button
@@ -417,5 +421,6 @@ export default function WarehouseDetailPage() {
         </form>
       </Modal>
     </div>
+    </AppLayout>
   );
 }
